@@ -15,7 +15,7 @@ public static class MainMenuPatches
 
     private static void HandleModsButtonClick()
     {
-        Console.WriteLine("REAL");
+        ModButtonPlugin.ConfigManager.DisplayingWindow = true;
     }
 
     [HarmonyPatch(typeof(MainMenu), nameof(MainMenu.Start))]
@@ -56,7 +56,7 @@ public static class MainMenuPatches
         FieldInfo persistentInfo = onClickType.BaseType!.BaseType!
             .GetField("m_PersistentCalls", BindingFlags.Instance | BindingFlags.NonPublic);
 
-        persistentInfo.SetValue(onClick, Activator.CreateInstance(persistentInfo.FieldType));
+        persistentInfo!.SetValue(onClick, Activator.CreateInstance(persistentInfo.FieldType));
 
         onClickType
             .GetMethod("RemoveAllListeners", BindingFlags.Instance | BindingFlags.Public)!
