@@ -1,4 +1,5 @@
 ﻿using BepInEx;
+using BepInEx.Logging;
 using HarmonyLib;
 using SkinLoader.Patches;
 
@@ -9,15 +10,15 @@ namespace SkinLoader
     {
         private Harmony _harmony;
         
-        private void Awake()
-        {
-            
-        }
+        // ReSharper disable once InconsistentNaming
+        internal static ManualLogSource _Logger;
 
         private void Start()
         {
             _harmony = new Harmony("KOR_Mods.SkinLoader");
             _harmony.PatchAll(typeof(CosmeticManagerPatches));
+            
+            _Logger = this.Logger;
         }
     }
 }
