@@ -1,4 +1,3 @@
-using System;
 using HarmonyLib;
 
 namespace CheatTools.Patches;
@@ -9,6 +8,6 @@ public static class HealthSystemPatches
     [HarmonyPrefix]
     private static bool TakeDamagePatch()
     {
-        return !CheatToolsPlugin.Instance.ConfigInvincibility;
+        return !CheatToolsPlugin.Instance.ConfigInvincibility.Value;
     } 
 }

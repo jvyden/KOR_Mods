@@ -13,14 +13,17 @@ public class CheatToolsPlugin : BaseUnityPlugin
 
     internal static CheatToolsPlugin Instance;
 
-    private ConfigEntry<bool> _configInvincibility;
-    public bool ConfigInvincibility => _configInvincibility.Value;
+    public ConfigEntry<bool> ConfigInvincibility;
+    public ConfigEntry<bool> ConfigBouncy;
+    
+    // disable battery colliders so they just pile up on the floor
 
     private void Awake()
     {
         Instance = this;
         
-        this._configInvincibility = Config.Bind("Cheats", "Invincibility", false, "xd");
+        this.ConfigInvincibility = Config.Bind("Cheats", "Invincibility", false);
+        this.ConfigBouncy = Config.Bind("Cheats", "Bouncy", false);
         
         Config.SaveOnConfigSet = true;
         Config.Save();

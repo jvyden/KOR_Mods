@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModButton", "ModButton\ModB
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheatTools", "CheatTools\CheatTools.csproj", "{09D32B8D-0CE0-42C6-B351-91C99597F7C8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FPSCounter", "FPSCounter\FPSCounter.csproj", "{55835E58-7784-48F9-A23F-856B58394B56}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{09D32B8D-0CE0-42C6-B351-91C99597F7C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{09D32B8D-0CE0-42C6-B351-91C99597F7C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{09D32B8D-0CE0-42C6-B351-91C99597F7C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55835E58-7784-48F9-A23F-856B58394B56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55835E58-7784-48F9-A23F-856B58394B56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55835E58-7784-48F9-A23F-856B58394B56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55835E58-7784-48F9-A23F-856B58394B56}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
