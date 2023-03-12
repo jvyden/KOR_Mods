@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace ModButton;
+namespace ModButton.Helpers;
 
 public static class AudioHelper
 {
