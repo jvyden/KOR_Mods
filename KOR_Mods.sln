@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FPSCounter", "FPSCounter\FP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkinLoader", "SkinLoader\SkinLoader.csproj", "{19B07528-E38E-4418-A2B8-FCD3568E81BB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoStartupFullscreen", "NoStartupFullscreen\NoStartupFullscreen.csproj", "{9536BDCE-FCFE-4994-8C3D-59B28E53F475}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +38,9 @@ Global
 		{19B07528-E38E-4418-A2B8-FCD3568E81BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19B07528-E38E-4418-A2B8-FCD3568E81BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{19B07528-E38E-4418-A2B8-FCD3568E81BB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9536BDCE-FCFE-4994-8C3D-59B28E53F475}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9536BDCE-FCFE-4994-8C3D-59B28E53F475}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9536BDCE-FCFE-4994-8C3D-59B28E53F475}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9536BDCE-FCFE-4994-8C3D-59B28E53F475}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
