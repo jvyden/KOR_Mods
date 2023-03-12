@@ -5,7 +5,7 @@ using SkinLoader.Patches;
 
 namespace SkinLoader
 {
-    [BepInPlugin("KOR_Mods.SkinLoader", "Skin Loader", "1.0.0")]
+    [BepInPlugin("KOR_Mods.SkinLoader", "Skin Loader", "1.0.1")]
     public class SkinLoaderPlugin : BaseUnityPlugin
     {
         private Harmony _harmony;

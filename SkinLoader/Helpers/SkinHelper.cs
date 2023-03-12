@@ -11,9 +11,17 @@ namespace SkinLoader.Helpers;
 [SuppressMessage("ReSharper", "UseObjectOrCollectionInitializer")]
 public static class SkinHelper
 {
+    private static readonly Dictionary<string, CosmeticItem[]> CustomCosmeticCache = new();
+
     public static void AddCustomSkins(CosmeticManager cosmeticManager)
     {
         if (cosmeticManager == null) return;
+
+        if (CustomCosmeticCache.TryGetValue(cosmeticManager.typeOfCosmetic, out CosmeticItem[] cachedItems))
+        {
+            cosmeticManager.cosmetics = cosmeticManager.cosmetics.AddRangeToArray(cachedItems);
+            return;
+        }
         
         SkinLoaderPlugin._Logger.LogInfo($"Loading custom '{cosmeticManager.typeOfCosmetic}' cosmetics");
         int order = cosmeticManager.cosmetics.Max(c => c.MenuOrder) + 1;
@@ -66,8 +74,11 @@ public static class SkinHelper
             customItems.Add(customItem);
             order++;
         }
-        
-        cosmeticManager.cosmetics = cosmeticManager.cosmetics.AddRangeToArray(customItems.ToArray());
+
+        CosmeticItem[] customItemsArr = customItems.ToArray();
+
+        CustomCosmeticCache.Add(cosmeticManager.typeOfCosmetic, customItemsArr);
+        cosmeticManager.cosmetics = cosmeticManager.cosmetics.AddRangeToArray(customItemsArr);
         SkinLoaderPlugin._Logger.LogInfo($"Injected {customItems.Count} {cosmeticManager.typeOfCosmetic} cosmetics");
     }
 }
