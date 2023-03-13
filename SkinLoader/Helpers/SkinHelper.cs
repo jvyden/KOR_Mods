@@ -68,9 +68,10 @@ public static class SkinHelper
             AccessTools.Field(typeof(CosmeticItem), "menuOrder").SetValue(customItem, order);
             AccessTools.Field(typeof(CosmeticItem), "price").SetValue(customItem, 0);
 
-            string name = "mod - " + Path.GetFileNameWithoutExtension(filename);
-            AccessTools.Field(typeof(CosmeticItem), "cosmeticName").SetValue(customItem, name);
-            
+            string name = Path.GetFileNameWithoutExtension(filename);
+            AccessTools.Field(typeof(CosmeticItem), "cosmeticName").SetValue(customItem, "mod - " + name);
+            AccessTools.Field(typeof(CosmeticItem), "animationName").SetValue(customItem, "skinLoaderMod" + name);
+
             customItems.Add(customItem);
             order++;
         }
