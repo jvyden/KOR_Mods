@@ -5,7 +5,7 @@ using System.Reflection.Emit;
 using HarmonyLib;
 using UnityEngine;
 
-namespace NoStartupFullscreen.Patches;
+namespace GeneralTweaks.Patches;
 
 public static class StartCounterPatches
 {
@@ -13,7 +13,6 @@ public static class StartCounterPatches
     
     [HarmonyPatch(typeof(StartCounter), "Awake")]
     [HarmonyTranspiler]
-    [HarmonyEmitIL]
     private static IEnumerable<CodeInstruction> StartTranspiler(IEnumerable<CodeInstruction> instructions)
     {
         bool found = false;

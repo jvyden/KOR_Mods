@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FPSCounter", "FPSCounter\FP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SkinLoader", "SkinLoader\SkinLoader.csproj", "{19B07528-E38E-4418-A2B8-FCD3568E81BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoStartupFullscreen", "NoStartupFullscreen\NoStartupFullscreen.csproj", "{9536BDCE-FCFE-4994-8C3D-59B28E53F475}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeneralTweaks", "GeneralTweaks\GeneralTweaks.csproj", "{9536BDCE-FCFE-4994-8C3D-59B28E53F475}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
