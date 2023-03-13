@@ -8,6 +8,6 @@ public static class HealthSystemPatches
     [HarmonyPrefix]
     private static bool TakeDamagePatch()
     {
-        return !CheatToolsPlugin.Instance.ConfigInvincibility.Value;
+        return !CheatToolsPlugin.ConfigInvincibility.Value;
     } 
 }

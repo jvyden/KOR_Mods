@@ -14,10 +14,8 @@ public class CheatToolsPlugin : BaseUnityPlugin
 {
     private Harmony _harmony;
 
-    internal static CheatToolsPlugin Instance;
-
-    public ConfigEntry<bool> ConfigInvincibility;
-    public ConfigEntry<bool> ConfigBouncy;
+    public static ConfigEntry<bool> ConfigInvincibility;
+    public static ConfigEntry<bool> ConfigBouncy;
 
     private readonly Lazy<CosmeticManager[]> _cosmeticManagers = new(FindObjectsOfType<CosmeticManager>);
 
@@ -25,10 +23,8 @@ public class CheatToolsPlugin : BaseUnityPlugin
 
     private void Awake()
     {
-        Instance = this;
-        
-        this.ConfigInvincibility = Config.Bind("Player", "Invincibility", false);
-        this.ConfigBouncy = Config.Bind("Player", "Bouncy", false);
+        ConfigInvincibility = Config.Bind("Player", "Invincibility", false);
+        ConfigBouncy = Config.Bind("Fun", "Bouncy Robot", false);
 
         Config.Bind("Coins", "Add coins", string.Empty, new ConfigDescription(string.Empty, null, new ConfigurationManagerAttributes()
         {
@@ -80,6 +76,7 @@ public class CheatToolsPlugin : BaseUnityPlugin
         this._harmony = new Harmony("KOR_Mods.CheatTools");
         this._harmony.PatchAll(typeof(HealthSystemPatches));
         this._harmony.PatchAll(typeof(CosmeticsUIPatches));
+        this._harmony.PatchAll(typeof(MovementScriptPatches));
     }
 
     private void OnDestroy()
