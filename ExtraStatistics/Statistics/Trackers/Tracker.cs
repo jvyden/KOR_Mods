@@ -4,7 +4,7 @@ namespace ExtraStatistics.Statistics.Trackers;
 
 public abstract class Tracker : MonoBehaviour
 {
-    protected abstract int GetStatistic();
+    protected abstract string GetStatistic();
     protected abstract string StatisticDisplayName { get; }
     
     private Statistic _statistic;

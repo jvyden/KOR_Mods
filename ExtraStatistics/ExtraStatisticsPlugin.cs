@@ -5,7 +5,7 @@ using HarmonyLib;
 
 namespace ExtraStatistics
 {
-    [BepInPlugin("KOR_MODS.ExtraStatistics", "Extra Statistics", "1.0.1")]
+    [BepInPlugin("KOR_MODS.ExtraStatistics", "Extra Statistics", "1.0.2")]
     public class ExtraStatisticsPlugin : BaseUnityPlugin
     {
         private Harmony _harmony;
@@ -14,11 +14,13 @@ namespace ExtraStatistics
 
         public static ConfigEntry<bool> ConfigEnableMisses;
         public static ConfigEntry<bool> ConfigEnableCoins;
+        public static ConfigEntry<bool> ConfigEnableSpeed;
 
         private void Awake()
         {
             ConfigEnableMisses = Config.Bind("Trackers", "Show Misses", false);
             ConfigEnableCoins = Config.Bind("Trackers", "Show Earned Coins", false);
+            ConfigEnableSpeed = Config.Bind("Trackers", "Show Game Speed", false);
         }
 
         private void Start()

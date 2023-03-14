@@ -18,8 +18,9 @@ public static class MovementScriptPatches
         
         GameObject wipeCounter = GameObject.Find("WipeCounter");
 
-        if(ExtraStatisticsPlugin.ConfigEnableMisses.Value) CreateStatistic<MissTracker>(wipeCounter);
+        if(ExtraStatisticsPlugin.ConfigEnableSpeed.Value) CreateStatistic<SpeedTracker>(wipeCounter);
         if(ExtraStatisticsPlugin.ConfigEnableCoins.Value) CreateStatistic<CoinsTracker>(wipeCounter);
+        if(ExtraStatisticsPlugin.ConfigEnableMisses.Value) CreateStatistic<MissTracker>(wipeCounter);
     }
 
     private static int _yOffset = 0;

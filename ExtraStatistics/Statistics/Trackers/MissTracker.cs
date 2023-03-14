@@ -4,9 +4,9 @@ public class MissTracker : Tracker
 {
     public static int Misses = 0; 
     
-    protected override int GetStatistic()
+    protected override string GetStatistic()
     {
-        return Misses;
+        return Misses.ToString();
     }
 
     protected override string StatisticDisplayName => "Miss";
