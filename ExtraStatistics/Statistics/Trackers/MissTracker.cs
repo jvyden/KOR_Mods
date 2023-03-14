@@ -11,5 +11,5 @@ public class MissTracker : Tracker
         return Misses;
     }
 
-    protected override string StatisticDisplayName => "MISS";
+    protected override string StatisticDisplayName => "Miss";
 }
