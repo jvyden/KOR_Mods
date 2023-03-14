@@ -26,7 +26,6 @@ public static class MainMenuPatches
             GeneralTweaksPlugin._Logger.LogWarning("Unable to find Play Games button, can't disable!");
         else
         {
-            GeneralTweaksPlugin._Logger.LogInfo("Disabled Play Games button");
             button.SetActive(false);
         }
     }
