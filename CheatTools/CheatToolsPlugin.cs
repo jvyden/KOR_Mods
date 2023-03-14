@@ -16,14 +16,20 @@ public class CheatToolsPlugin : BaseUnityPlugin
 
     public static ConfigEntry<bool> ConfigInvincibility;
     public static ConfigEntry<bool> ConfigBouncy;
+    public static ConfigEntry<bool> ConfigMouseX;
 
     private readonly Lazy<CosmeticManager[]> _cosmeticManagers = new(FindObjectsOfType<CosmeticManager>);
 
     // disable battery colliders so they just pile up on the floor
 
+    public static bool IsCheating => ConfigInvincibility.Value ||
+                                     ConfigBouncy.Value ||
+                                     ConfigMouseX.Value;
+
     private void Awake()
     {
         ConfigInvincibility = Config.Bind("Player", "Invincibility", false);
+        ConfigMouseX = Config.Bind("Player", "Mouse as X position", false);
         ConfigBouncy = Config.Bind("Fun", "Bouncy Robot", false);
 
         Config.Bind("Coins", "Add coins", string.Empty, new ConfigDescription(string.Empty, null, new ConfigurationManagerAttributes()
