@@ -9,7 +9,7 @@ using UnityEngine;
 namespace CheatTools;
 
 [BepInProcess("K.O.R")]
-[BepInPlugin("KOR_Mods.CheatTools", "K.O.R Cheat Tools", "1.0.1")]
+[BepInPlugin("KOR_Mods.CheatTools", "K.O.R Cheat Tools", "1.0.2")]
 public class CheatToolsPlugin : BaseUnityPlugin
 {
     private Harmony _harmony;
