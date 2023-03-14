@@ -9,7 +9,7 @@ using UnityEngine;
 namespace CheatTools;
 
 [BepInProcess("K.O.R")]
-[BepInPlugin("KOR_Mods.CheatTools", "K.O.R Cheat Tools", "1.0.2")]
+[BepInPlugin("KOR_Mods.CheatTools", "K.O.R Cheat Tools", "1.0.3")]
 public class CheatToolsPlugin : BaseUnityPlugin
 {
     private Harmony _harmony;
@@ -17,6 +17,9 @@ public class CheatToolsPlugin : BaseUnityPlugin
     public static ConfigEntry<bool> ConfigInvincibility;
     public static ConfigEntry<bool> ConfigBouncy;
     public static ConfigEntry<bool> ConfigMouseX;
+    
+    public static ConfigEntry<bool> ConfigNoHeal;
+    public static ConfigEntry<bool> ConfigNoSlow;
 
     private readonly Lazy<CosmeticManager[]> _cosmeticManagers = new(FindObjectsOfType<CosmeticManager>);
 
@@ -24,13 +27,19 @@ public class CheatToolsPlugin : BaseUnityPlugin
 
     public static bool IsCheating => ConfigInvincibility.Value ||
                                      ConfigBouncy.Value ||
-                                     ConfigMouseX.Value;
+                                     ConfigMouseX.Value ||
+                                     ConfigNoHeal.Value ||
+                                     ConfigNoSlow.Value;
 
     private void Awake()
     {
         ConfigInvincibility = Config.Bind("Player", "Invincibility", false);
         ConfigMouseX = Config.Bind("Player", "Mouse as X position", false);
+        
         ConfigBouncy = Config.Bind("Fun", "Bouncy Robot", false);
+
+        ConfigNoHeal = Config.Bind("Spawning", "No Heal Batteries", false);
+        ConfigNoSlow = Config.Bind("Spawning", "No Slow-mo Batteries", false);
 
         Config.Bind("Coins", "Add coins", string.Empty, new ConfigDescription(string.Empty, null, new ConfigurationManagerAttributes()
         {
@@ -83,6 +92,7 @@ public class CheatToolsPlugin : BaseUnityPlugin
         this._harmony.PatchAll(typeof(HealthSystemPatches));
         this._harmony.PatchAll(typeof(CosmeticsUIPatches));
         this._harmony.PatchAll(typeof(MovementScriptPatches));
+        this._harmony.PatchAll(typeof(FoodSpawnerPatches));
     }
 
     private void OnDestroy()
