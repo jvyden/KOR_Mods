@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace ExtraStatistics.Statistics.Trackers;
 
 public class MissTracker : Tracker

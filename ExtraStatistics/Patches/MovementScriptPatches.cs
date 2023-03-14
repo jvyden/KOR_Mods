@@ -1,5 +1,4 @@
 using System.Diagnostics.CodeAnalysis;
-using System.Runtime.CompilerServices;
 using ExtraStatistics.Statistics;
 using ExtraStatistics.Statistics.Trackers;
 using HarmonyLib;
