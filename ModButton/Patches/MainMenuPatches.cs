@@ -39,7 +39,7 @@ public static class MainMenuPatches
         textMeshComponent
             .GetType()
             .GetProperty("text")!
-            .SetValue(textMeshComponent, modsButton.name);
+            .SetValue(textMeshComponent, "MOD SETTINGS");
         
         // Change button behaviour. Once again, we don't have the button type (UnityEngine.UI.Button) so prepare for hell.
         // This spaghetti is even worse. I spent hours on this. I'm sorry.

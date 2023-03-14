@@ -6,7 +6,7 @@ using ModButton.Patches;
 namespace ModButton;
 
 [BepInProcess("K.O.R")]
-[BepInPlugin("KOR_Mods.ModButton", "Mod Button", "1.0.0")]
+[BepInPlugin("KOR_Mods.ModButton", "Mod Button", "1.0.1")]
 [BepInDependency(ConfigurationManager.ConfigurationManager.GUID)]
 public class ModButtonPlugin : BaseUnityPlugin
 {
@@ -15,7 +15,6 @@ public class ModButtonPlugin : BaseUnityPlugin
     // ReSharper disable InconsistentNaming
     internal static ManualLogSource _Logger;
     internal static ConfigurationManager.ConfigurationManager ConfigManager;
-    // internal static ModButtonPlugin _Instance; // Avoid using whenever possible.
     // ReSharper restore InconsistentNaming
         
     private void Start()
@@ -24,7 +23,6 @@ public class ModButtonPlugin : BaseUnityPlugin
         this._harmony.PatchAll(typeof(MainMenuPatches));
         
         _Logger = this.Logger;
-        // _Instance = this;
 
         ConfigManager = GetComponent<ConfigurationManager.ConfigurationManager>();
         ConfigManager.OverrideHotkey = true;
