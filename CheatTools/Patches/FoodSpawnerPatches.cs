@@ -18,4 +18,11 @@ public static class FoodSpawnerPatches
     {
         return !CheatToolsPlugin.ConfigNoHeal.Value;
     }
+    
+    [HarmonyPatch(typeof(FoodSpawner), "SpawnLakrits")]
+    [HarmonyPrefix]
+    public static bool ShouldSpawnMeteor()
+    {
+        return !CheatToolsPlugin.ConfigNoMeteors.Value;
+    }
 }

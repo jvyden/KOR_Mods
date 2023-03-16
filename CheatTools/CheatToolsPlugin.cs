@@ -23,6 +23,7 @@ public class CheatToolsPlugin : BaseUnityPlugin
     // Spawning
     public static ConfigEntry<bool> ConfigNoHeal;
     public static ConfigEntry<bool> ConfigNoSlow;
+    public static ConfigEntry<bool> ConfigNoMeteors;
     
     // Game
     public static ConfigEntry<bool> ConfigNoSpeedCap;
@@ -36,7 +37,8 @@ public class CheatToolsPlugin : BaseUnityPlugin
                                      ConfigMouseX.Value ||
                                      ConfigNoHeal.Value ||
                                      ConfigNoSlow.Value ||
-                                     ConfigNoSpeedCap.Value;
+                                     ConfigNoSpeedCap.Value ||
+                                     ConfigNoMeteors.Value;
 
     private void Awake()
     {
@@ -47,6 +49,7 @@ public class CheatToolsPlugin : BaseUnityPlugin
 
         ConfigNoHeal = Config.Bind("Spawning", "No Heal Batteries", false);
         ConfigNoSlow = Config.Bind("Spawning", "No Slow-mo Batteries", false);
+        ConfigNoMeteors = Config.Bind("Spawning", "No Meteors", false);
 
         ConfigNoSpeedCap = Config.Bind("Game", "No speed cap", false,
             "Stops the game from trying to cap it's speed at 10. Requires restart.");
