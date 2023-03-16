@@ -27,10 +27,10 @@ public static class MainMenuPatches
         GameObject modsButton = Object.Instantiate(statsButton, __instance.transform, true);
 
         _modsButton = modsButton;
-        
-        Vector3 pos = modsButton.transform.position;
-        pos.y -= 117.6f; // Distance between play and customization buttons
-        modsButton.transform.position = pos;
+
+        Vector3 pos = modsButton.transform.localPosition;
+        pos.y -= 141.07f; // Distance between play and customization buttons
+        modsButton.transform.localPosition = pos;
         
         modsButton.name = "MODS";
         // We don't have TMP available to us from a plugin, so it's time to do some funky things
