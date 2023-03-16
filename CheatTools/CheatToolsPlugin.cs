@@ -13,12 +13,19 @@ public class CheatToolsPlugin : BaseUnityPlugin
 {
     private Harmony _harmony;
 
+    // Player
     public static ConfigEntry<bool> ConfigInvincibility;
-    public static ConfigEntry<bool> ConfigBouncy;
     public static ConfigEntry<bool> ConfigMouseX;
     
+    // Fun
+    public static ConfigEntry<bool> ConfigBouncy;
+    
+    // Spawning
     public static ConfigEntry<bool> ConfigNoHeal;
     public static ConfigEntry<bool> ConfigNoSlow;
+    
+    // Game
+    public static ConfigEntry<bool> ConfigNoSpeedCap;
 
     private readonly Lazy<CosmeticManager[]> _cosmeticManagers = new(FindObjectsOfType<CosmeticManager>);
 
@@ -28,7 +35,8 @@ public class CheatToolsPlugin : BaseUnityPlugin
                                      ConfigBouncy.Value ||
                                      ConfigMouseX.Value ||
                                      ConfigNoHeal.Value ||
-                                     ConfigNoSlow.Value;
+                                     ConfigNoSlow.Value ||
+                                     ConfigNoSpeedCap.Value;
 
     private void Awake()
     {
@@ -39,6 +47,9 @@ public class CheatToolsPlugin : BaseUnityPlugin
 
         ConfigNoHeal = Config.Bind("Spawning", "No Heal Batteries", false);
         ConfigNoSlow = Config.Bind("Spawning", "No Slow-mo Batteries", false);
+
+        ConfigNoSpeedCap = Config.Bind("Game", "No speed cap", false,
+            "Stops the game from trying to cap it's speed at 10. Requires restart.");
 
         Config.Bind("Coins", "Add coins", string.Empty, new ConfigDescription(string.Empty, null, new ConfigurationManagerAttributes()
         {
@@ -92,6 +103,7 @@ public class CheatToolsPlugin : BaseUnityPlugin
         this._harmony.PatchAll(typeof(CosmeticsUIPatches));
         this._harmony.PatchAll(typeof(MovementScriptPatches));
         this._harmony.PatchAll(typeof(FoodSpawnerPatches));
+        this._harmony.PatchAll(typeof(GameManagerPatcher));
     }
 
     private void OnDestroy()
