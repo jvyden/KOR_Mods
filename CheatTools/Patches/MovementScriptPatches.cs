@@ -10,6 +10,7 @@ namespace CheatTools.Patches;
 public static class MovementScriptPatches
 {
     private static readonly FieldInfo _cosmeticSwitcherInfo = AccessTools.Field(typeof(MovementScript), "cosmeticSwitcher");
+    private static readonly FieldInfo _colliderInfo = AccessTools.Field(typeof(MovementScript), "_collider");
 
     [HarmonyPatch(typeof(MovementScript), "Awake")]
     [HarmonyPostfix]
@@ -17,6 +18,14 @@ public static class MovementScriptPatches
     {
         if (CheatToolsPlugin.ConfigBouncy.Value) __instance.gameObject.AddComponent<BouncyMovement>();
         if (CheatToolsPlugin.ConfigMouseX.Value) __instance.gameObject.AddComponent<MouseXMovement>();
+
+        if (CheatToolsPlugin.ConfigCircle.Value)
+        {
+            Object.Destroy(__instance.GetComponent<BoxCollider2D>());
+            Collider2D collider = __instance.gameObject.AddComponent<CircleCollider2D>();
+            
+            _colliderInfo.SetValue(__instance, collider);
+        }
     }
 
     [HarmonyPatch(typeof(MovementScript), nameof(MovementScript.MovementFunction))]

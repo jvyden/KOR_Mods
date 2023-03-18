@@ -8,7 +8,7 @@ using UnityEngine;
 namespace CheatTools;
 
 [BepInProcess("K.O.R")]
-[BepInPlugin("KOR_Mods.CheatTools", "K.O.R Cheat Tools", "1.0.3")]
+[BepInPlugin("KOR_Mods.CheatTools", "K.O.R Cheat Tools", "1.0.4")]
 public class CheatToolsPlugin : BaseUnityPlugin
 {
     private Harmony _harmony;
@@ -16,6 +16,7 @@ public class CheatToolsPlugin : BaseUnityPlugin
     // Player
     public static ConfigEntry<bool> ConfigInvincibility;
     public static ConfigEntry<bool> ConfigMouseX;
+    public static ConfigEntry<bool> ConfigCircle;
     
     // Fun
     public static ConfigEntry<bool> ConfigBouncy;
@@ -38,12 +39,14 @@ public class CheatToolsPlugin : BaseUnityPlugin
                                      ConfigNoHeal.Value ||
                                      ConfigNoSlow.Value ||
                                      ConfigNoSpeedCap.Value ||
-                                     ConfigNoMeteors.Value;
+                                     ConfigNoMeteors.Value ||
+                                     ConfigCircle.Value;
 
     private void Awake()
     {
         ConfigInvincibility = Config.Bind("Player", "Invincibility", false);
         ConfigMouseX = Config.Bind("Player", "Mouse as X position", false);
+        ConfigCircle = Config.Bind("Player", "Circular hitbox", false);
         
         ConfigBouncy = Config.Bind("Fun", "Bouncy Robot", false);
 
