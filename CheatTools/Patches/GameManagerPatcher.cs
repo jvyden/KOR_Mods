@@ -9,6 +9,7 @@ public static class GameManagerPatcher
 {
     [HarmonyPatch(typeof(GameManager), "Update")]
     [HarmonyTranspiler]
+    [HarmonyEmitIL]
     private static IEnumerable<CodeInstruction> StartTranspiler(IEnumerable<CodeInstruction> instructions)
     {
         if (!CheatToolsPlugin.ConfigNoSpeedCap.Value)
@@ -24,10 +25,10 @@ public static class GameManagerPatcher
         var found = false;
         foreach (var instruction in instructions)
         {
-            if (instruction.opcode == OpCodes.Ldc_R4 && !found)
+            if (instruction.opcode == OpCodes.Ldarg_0 && !found)
             {
                 found = true;
-                yield return new CodeInstruction(OpCodes.Ldc_R4, float.MaxValue);
+                yield return new CodeInstruction(CodeInstruction.LoadField(typeof(CheatToolsPlugin), nameof(CheatToolsPlugin.ConfigNoSpeedCap)));
                 continue;
             }
             
