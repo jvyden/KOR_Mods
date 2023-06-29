@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Reflection.Emit;
+using Cosmetics;
 using HarmonyLib;
 using SkinLoader.Helpers;
 

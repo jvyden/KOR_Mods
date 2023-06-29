@@ -1,5 +1,5 @@
+using FallingObjects;
 using HarmonyLib;
-using Scripts.FallingObjects;
 
 namespace CheatTools.Patches;
 

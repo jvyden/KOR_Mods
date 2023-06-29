@@ -2,6 +2,7 @@
 using BepInEx;
 using BepInEx.Configuration;
 using CheatTools.Patches;
+using Cosmetics;
 using HarmonyLib;
 using UnityEngine;
 
@@ -29,7 +30,7 @@ public class CheatToolsPlugin : BaseUnityPlugin
     // Game
     public static ConfigEntry<bool> ConfigNoSpeedCap;
 
-    private readonly Lazy<CosmeticManager[]> _cosmeticManagers = new(FindObjectsOfType<CosmeticManager>);
+    // private readonly Lazy<CosmeticManager[]> _cosmeticManagers = new(FindObjectsOfType<CosmeticManager>);
 
     // disable battery colliders so they just pile up on the floor
 
@@ -62,10 +63,10 @@ public class CheatToolsPlugin : BaseUnityPlugin
             CustomDrawer = AddCoinsDrawer
         }));
         
-        Config.Bind("Cosmetics", "Unlock", string.Empty, new ConfigDescription(string.Empty, null, new ConfigurationManagerAttributes()
-        {
-            CustomDrawer = UnlockAllCosmeticsDrawer
-        }));
+        // Config.Bind("Cosmetics", "Unlock", string.Empty, new ConfigDescription(string.Empty, null, new ConfigurationManagerAttributes()
+        // {
+        //     CustomDrawer = UnlockAllCosmeticsDrawer
+        // }));
         
         Config.SaveOnConfigSet = true;
         Config.Save();
@@ -83,30 +84,29 @@ public class CheatToolsPlugin : BaseUnityPlugin
         }
     }
 
-    private void UnlockAllCosmeticsDrawer(ConfigEntryBase entry)
-    {
-        foreach (CosmeticManager cosmeticManager in _cosmeticManagers.Value)
-        {
-            if (GUILayout.Button($"Unlock all {cosmeticManager.typeOfCosmetic}s", GUILayout.ExpandWidth(true)))
-                UnlockAllCosmetics(cosmeticManager);
-        }
-    }
-
-    private static void UnlockAllCosmetics(CosmeticManager cosmeticManager)
-    {
-        for (var i = 0; i < cosmeticManager.cosmetics.Length; i++)
-        {
-            CosmeticItem cosmetic = cosmeticManager.cosmetics[i];
-            Console.WriteLine($"Legally obtaining {cosmeticManager.typeOfCosmetic} cosmetic {cosmetic.AnimationName} (order: {i})");
-            PlayerPrefs.SetInt(cosmeticManager.typeOfCosmetic + cosmeticManager.Cosmetics[i].AnimationName, 1);
-        }
-    }
+    // private void UnlockAllCosmeticsDrawer(ConfigEntryBase entry)
+    // {
+    //     foreach (CosmeticManager cosmeticManager in _cosmeticManagers.Value)
+    //     {
+    //         if (GUILayout.Button($"Unlock all {cosmeticManager.typeOfCosmetic}s", GUILayout.ExpandWidth(true)))
+    //             UnlockAllCosmetics(cosmeticManager);
+    //     }
+    // }
+    //
+    // private static void UnlockAllCosmetics(CosmeticManager cosmeticManager)
+    // {
+    //     for (var i = 0; i < cosmeticManager.cosmetics.Length; i++)
+    //     {
+    //         CosmeticItem cosmetic = cosmeticManager.cosmetics[i];
+    //         Console.WriteLine($"Legally obtaining {cosmeticManager.typeOfCosmetic} cosmetic {cosmetic.AnimationName} (order: {i})");
+    //         PlayerPrefs.SetInt(cosmeticManager.typeOfCosmetic + cosmeticManager.Cosmetics[i].AnimationName, 1);
+    //     }
+    // }
 
     private void Start()
     {
         this._harmony = new Harmony("KOR_Mods.CheatTools");
         this._harmony.PatchAll(typeof(HealthSystemPatches));
-        this._harmony.PatchAll(typeof(CosmeticsUIPatches));
         this._harmony.PatchAll(typeof(MovementScriptPatches));
         this._harmony.PatchAll(typeof(FoodSpawnerPatches));
         this._harmony.PatchAll(typeof(GameManagerPatcher));

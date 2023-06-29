@@ -1,6 +1,6 @@
 using ExtraStatistics.Statistics.Trackers;
+using FallingObjects;
 using HarmonyLib;
-using Scripts.FallingObjects;
 
 namespace ExtraStatistics.Patches;
 

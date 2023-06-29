@@ -74,15 +74,15 @@ public static class MainMenuPatches
 
     [HarmonyPatch(typeof(MainMenu), nameof(MainMenu.ClickEndless))]
     [HarmonyPatch(typeof(MainMenu), nameof(MainMenu.OpenSkins))]
-    [HarmonyPatch(typeof(MainMenu), nameof(MainMenu.Settings))]
-    [HarmonyPatch(typeof(MainMenu), nameof(MainMenu.Statistics))]
+    [HarmonyPatch(typeof(MainMenu), nameof(MainMenu.OpenSettings))]
+    [HarmonyPatch(typeof(MainMenu), nameof(MainMenu.OpenStatistics))]
     [HarmonyPrefix]
     private static void HideModsButton()
     {
         if(_modsButton != null) _modsButton.SetActive(false);
     }
 
-    [HarmonyPatch(typeof(MainMenu), nameof(MainMenu.backToMainMenu))]
+    [HarmonyPatch(typeof(MainMenu), nameof(MainMenu.BackToMainMenu))]
     [HarmonyPostfix]
     private static void RestoreModsButton()
     {
