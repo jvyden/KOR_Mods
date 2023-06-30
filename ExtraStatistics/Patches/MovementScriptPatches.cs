@@ -32,7 +32,7 @@ public static class MovementScriptPatches
         
         // offset our new text
         Vector3 newPos = statisticObj.transform.localPosition;
-        newPos.y -= 28 * _yOffset++;
+        newPos.y -= 48 * _yOffset++;
         statisticObj.transform.localPosition = newPos;
         
         // nuke vanilla tracker
