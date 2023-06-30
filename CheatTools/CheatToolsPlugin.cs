@@ -1,15 +1,12 @@
-﻿using System;
-using BepInEx;
+﻿using BepInEx;
 using BepInEx.Configuration;
 using CheatTools.Patches;
-using Cosmetics;
 using HarmonyLib;
-using UnityEngine;
 
 namespace CheatTools;
 
 [BepInProcess("K.O.R")]
-[BepInPlugin("KOR_Mods.CheatTools", "K.O.R Cheat Tools", "1.0.4")]
+[BepInPlugin("KOR_Mods.CheatTools", "K.O.R Cheat Tools", "1.0.5")]
 public class CheatToolsPlugin : BaseUnityPlugin
 {
     private Harmony _harmony;
@@ -109,7 +106,7 @@ public class CheatToolsPlugin : BaseUnityPlugin
         this._harmony.PatchAll(typeof(HealthSystemPatches));
         this._harmony.PatchAll(typeof(MovementScriptPatches));
         this._harmony.PatchAll(typeof(FoodSpawnerPatches));
-        this._harmony.PatchAll(typeof(GameManagerPatcher));
+        this._harmony.PatchAll(typeof(GameManagerPatches));
     }
 
     private void OnDestroy()
