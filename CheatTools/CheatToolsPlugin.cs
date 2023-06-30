@@ -58,10 +58,10 @@ public class CheatToolsPlugin : BaseUnityPlugin
         ConfigNoSpeedCap = Config.Bind("Game", "No speed cap", false,
             "Stops the game from trying to cap it's speed at 10. Requires restart.");
 
-        Config.Bind("Coins", "Add coins", string.Empty, new ConfigDescription(string.Empty, null, new ConfigurationManagerAttributes()
-        {
-            CustomDrawer = AddCoinsDrawer
-        }));
+        // Config.Bind("Coins", "Add coins", string.Empty, new ConfigDescription(string.Empty, null, new ConfigurationManagerAttributes()
+        // {
+        //     CustomDrawer = AddCoinsDrawer
+        // }));
         
         // Config.Bind("Cosmetics", "Unlock", string.Empty, new ConfigDescription(string.Empty, null, new ConfigurationManagerAttributes()
         // {
@@ -72,17 +72,17 @@ public class CheatToolsPlugin : BaseUnityPlugin
         Config.Save();
     }
     
-    private void AddCoinsDrawer(ConfigEntryBase entry)
-    {
-        if (GUILayout.Button("Add 100 coins", GUILayout.ExpandWidth(true)))
-        {
-            PlayerPrefs.SetInt("money", PlayerPrefs.GetInt("money", 0) + 100);
-        }
-        if (GUILayout.Button("Add 1000 coins", GUILayout.ExpandWidth(true)))
-        {
-            PlayerPrefs.SetInt("money", PlayerPrefs.GetInt("money", 0) + 1000);
-        }
-    }
+    // private void AddCoinsDrawer(ConfigEntryBase entry)
+    // {
+    //     if (GUILayout.Button("Add 100 coins", GUILayout.ExpandWidth(true)))
+    //     {
+    //         PlayerPrefs.SetInt("money", PlayerPrefs.GetInt("money", 0) + 100);
+    //     }
+    //     if (GUILayout.Button("Add 1000 coins", GUILayout.ExpandWidth(true)))
+    //     {
+    //         PlayerPrefs.SetInt("money", PlayerPrefs.GetInt("money", 0) + 1000);
+    //     }
+    // }
 
     // private void UnlockAllCosmeticsDrawer(ConfigEntryBase entry)
     // {
