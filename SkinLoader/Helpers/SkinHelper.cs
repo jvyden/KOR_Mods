@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using System.Linq;
 using BepInEx;
 using Cosmetics;
 using HarmonyLib;
@@ -11,28 +12,26 @@ namespace SkinLoader.Helpers;
 [SuppressMessage("ReSharper", "UseObjectOrCollectionInitializer")]
 public static class SkinHelper
 {
-    private static readonly Dictionary<string, CosmeticItem[]> CustomCosmeticCache = new();
+    private static readonly Dictionary<CosmeticType, CosmeticItem[]> CustomCosmeticCache = new();
 
-    public static void AddCustomSkins(CosmeticManager cosmeticManager)
+    public static void AddCustomSkins(CosmeticType type, ref CosmeticItem[] cosmetics)
     {
-        if (cosmeticManager == null) return;
-
-        if (CustomCosmeticCache.TryGetValue(cosmeticManager.typeOfCosmetic, out CosmeticItem[] cachedItems))
+        if (CustomCosmeticCache.TryGetValue(type, out CosmeticItem[] cachedItems))
         {
-            cosmeticManager.cosmetics = cosmeticManager.cosmetics.AddRangeToArray(cachedItems);
+            cosmetics = cosmetics.AddRangeToArray(cachedItems);
             return;
         }
-        
-        SkinLoaderPlugin._Logger.LogInfo($"Loading custom '{cosmeticManager.typeOfCosmetic}' cosmetics");
-        int order = cosmeticManager.cosmetics.Max(c => c.MenuOrder) + 1;
 
-        string path = Path.Combine(Paths.GameRootPath, cosmeticManager.typeOfCosmetic);
+        SkinLoaderPlugin._Logger.LogInfo($"Loading custom '{type}' cosmetics");
+        int order = cosmetics.Max(c => c.MenuOrder) + 1;
+
+        string path = Path.Combine(Paths.GameRootPath, type.ToString());
 
         if (!Directory.Exists(path)) Directory.CreateDirectory(path);
         string[] files = Directory.GetFiles(path);
         
-        bool isSkin = cosmeticManager.typeOfCosmetic == "Skin";
-        bool isBackground = cosmeticManager.typeOfCosmetic == "Background";
+        bool isSkin = type == CosmeticType.Skin;
+        bool isBackground = type == CosmeticType.Background;
         
         Vector2 textureSize = isSkin ? new Vector2(16, 16) : new Vector2(176, 128);
 
@@ -41,7 +40,7 @@ public static class SkinHelper
         {
             CosmeticItem customItem = ScriptableObject.CreateInstance<CosmeticItem>();
             
-            SkinLoaderPlugin._Logger.LogInfo($"Loading {cosmeticManager.typeOfCosmetic} at {filename} (order: {order})");
+            SkinLoaderPlugin._Logger.LogInfo($"Loading {type} at {filename} (order: {order})");
 
             Texture2D tex = isSkin ? new Texture2D(256, 256) : new Texture2D(1920, 1080);
             tex.filterMode = FilterMode.Point;
@@ -78,8 +77,8 @@ public static class SkinHelper
 
         CosmeticItem[] customItemsArr = customItems.ToArray();
 
-        CustomCosmeticCache.Add(cosmeticManager.typeOfCosmetic, customItemsArr);
-        cosmeticManager.cosmetics = cosmeticManager.cosmetics.AddRangeToArray(customItemsArr);
-        SkinLoaderPlugin._Logger.LogInfo($"Injected {customItems.Count} {cosmeticManager.typeOfCosmetic} cosmetics");
+        CustomCosmeticCache.Add(type, customItemsArr);
+        cosmetics = cosmetics.AddRangeToArray(customItemsArr);
+        SkinLoaderPlugin._Logger.LogInfo($"Injected {customItems.Count} {type} cosmetics");
     }
 }

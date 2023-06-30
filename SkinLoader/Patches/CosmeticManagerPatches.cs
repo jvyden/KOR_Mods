@@ -12,18 +12,21 @@ namespace SkinLoader.Patches;
 [SuppressMessage("ReSharper", "InconsistentNaming")]
 public static class CosmeticManagerPatches
 {
-    private static readonly MethodInfo AddCustomSkinsInfo = SymbolExtensions.GetMethodInfo(() => SkinHelper.AddCustomSkins(null));
-    private static readonly FieldInfo CosmeticsField = AccessTools.Field(typeof(CosmeticManager), "cosmetics");
+    // placeholder, don't actually use
+    private static CosmeticItem[] cosmetics = Array.Empty<CosmeticItem>();
     
-    [HarmonyPatch(typeof(CosmeticManager), "LoadSkinsFromFolder")]
+    private static readonly MethodInfo AddCustomSkinsInfo = SymbolExtensions.GetMethodInfo(() => SkinHelper.AddCustomSkins(0, ref cosmetics));
+    private static readonly MethodInfo CalculateOwnedSkinsInfo = AccessTools.Method(typeof(CosmeticManager), nameof(CosmeticManager.CalculateOwnedCosmetics));
+    
+    [HarmonyPatch(typeof(CosmeticManager), "LoadSkins")]
     [HarmonyTranspiler]
-    private static IEnumerable<CodeInstruction> StartTranspiler(IEnumerable<CodeInstruction> instructions)
+    private static IEnumerable<CodeInstruction> StartTranspilerSkins(IEnumerable<CodeInstruction> instructions)
     {
-        var found = false;
-        var patched = false;
+        bool found = false;
+        bool patched = false;
         foreach (var instruction in instructions)
         {
-            if (instruction.StoresField(CosmeticsField))
+            if (instruction.Calls(CalculateOwnedSkinsInfo))
             {
                 found = true;
                 yield return instruction;
@@ -32,13 +35,42 @@ public static class CosmeticManagerPatches
 
             if (found && !patched)
             {
-                yield return new CodeInstruction(OpCodes.Ldarg_0);
+                yield return new CodeInstruction(OpCodes.Ldc_I4_0);
+                yield return CodeInstruction.LoadField(typeof(CosmeticManager), nameof(CosmeticManager.skins), true);
                 yield return new CodeInstruction(OpCodes.Call, AddCustomSkinsInfo);
                 patched = true;
             }
             yield return instruction;
         }
         if (found is false)
-            throw new Exception("Cannot find <Stdfld cosmetics> in CosmeticManager.LoadSkinsFromFolder");
+            throw new Exception("Cannot find <Stdfld cosmetics> in CosmeticManager.LoadSkins");
+    }
+    
+    [HarmonyPatch(typeof(CosmeticManager), "LoadBackgrounds")]
+    [HarmonyTranspiler]
+    private static IEnumerable<CodeInstruction> StartTranspilerBackgrounds(IEnumerable<CodeInstruction> instructions)
+    {
+        bool found = false;
+        bool patched = false;
+        foreach (var instruction in instructions)
+        {
+            if (instruction.Calls(CalculateOwnedSkinsInfo))
+            {
+                found = true;
+                yield return instruction;
+                continue;
+            }
+
+            if (found && !patched)
+            {
+                yield return new CodeInstruction(OpCodes.Ldc_I4_1);
+                yield return CodeInstruction.LoadField(typeof(CosmeticManager), nameof(CosmeticManager.backgrounds), true);
+                yield return new CodeInstruction(OpCodes.Call, AddCustomSkinsInfo);
+                patched = true;
+            }
+            yield return instruction;
+        }
+        if (found is false)
+            throw new Exception("Cannot find <Stdfld cosmetics> in CosmeticManager.LoadBackgrounds");
     }
 }
