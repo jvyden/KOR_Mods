@@ -9,7 +9,6 @@ public static class GameManagerPatcher
 {
     [HarmonyPatch(typeof(GameManager), "Update")]
     [HarmonyTranspiler]
-    [HarmonyEmitIL]
     private static IEnumerable<CodeInstruction> StartTranspiler(IEnumerable<CodeInstruction> instructions)
     {
         if (!CheatToolsPlugin.ConfigNoSpeedCap.Value)
