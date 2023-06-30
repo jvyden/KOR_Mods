@@ -76,6 +76,7 @@ public static class MainMenuPatches
     [HarmonyPatch(typeof(MainMenu), nameof(MainMenu.OpenSkins))]
     [HarmonyPatch(typeof(MainMenu), nameof(MainMenu.OpenSettings))]
     [HarmonyPatch(typeof(MainMenu), nameof(MainMenu.OpenStatistics))]
+    [HarmonyPatch(typeof(MainMenu), nameof(MainMenu.OpenAccountPage))]
     [HarmonyPrefix]
     private static void HideModsButton()
     {
