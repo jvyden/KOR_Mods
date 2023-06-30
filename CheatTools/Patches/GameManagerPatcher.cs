@@ -37,4 +37,11 @@ public static class GameManagerPatcher
         if (found is false)
             throw new Exception("Cannot find <Stdfld cosmetics> in CosmeticManager.LoadSkinsFromFolder");
     }
+    
+    [HarmonyPatch(typeof(GameManager), "UploadDataToServer")]
+    [HarmonyPrefix]
+    private static bool ShouldSubmitScorePatch()
+    {
+        return !CheatToolsPlugin.IsCheating;
+    } 
 }
